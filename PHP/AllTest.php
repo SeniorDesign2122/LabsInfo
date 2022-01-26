@@ -6,6 +6,18 @@
 class AllTest extends \PHPUnit\Framework\TestCase {
 
     /**
+     * This function tests getTitle() for all titles stored under qr string 'Unit Testing'
+     */
+    function testGetTitles() {
+        require_once('GetTitles.php');
+
+        $expected = array("Case A", "Case B", "Case C", "Case D", "Case E", "Case F", "Case G", "Case H", "Case I",
+            "Case J", "Case K", "Case L", "Case M");
+
+        $this->assertSame($expected, getTitles("Unit Testing"));
+    }
+    
+    /**
      * This functions tests getDetails() with various combinations of the following:
      * - description without picture or video
      * - picture without description
