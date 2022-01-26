@@ -6,6 +6,20 @@
 class AllTest extends \PHPUnit\Framework\TestCase {
 
     /**
+     * This function tests getQRStrings() for the all qr strings stored in our database 
+     */
+	function testGetQRStrings() {
+		require_once('GetQRStrings.php');
+
+        $expected = array("Lab 1", "Lab 2", "Unit Testing");
+
+        $actual = getQRStrings();
+        sort($actual);
+
+        $this->assertSame($expected, $actual);
+	}
+    
+    /**
      * This function tests getTitle() for all titles stored under qr string 'Unit Testing'
      */
     function testGetTitles() {
