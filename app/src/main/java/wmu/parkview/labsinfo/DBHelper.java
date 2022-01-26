@@ -14,7 +14,7 @@ public class DBHelper {
     /**
      * Gets details for all the entries from database that match the 'currentQRString' and
      * received 'title'
-     * @param context receives context of the application
+     * @param context context of the application
      * @param title the title string in database to which the query should be restricted to
      * @param testing if unit testing, expected to contain only one element with its value set to
      *                true; null otherwise
@@ -22,6 +22,19 @@ public class DBHelper {
      */
     static List<HashMap<String, String>> getDetails(Context context, String title,
                                                     boolean[] testing) {
+        return null;
+    }
+
+    /**
+     * Gets details for all the entries from database that match the 'currentQRString'
+     * @param context context of the application
+     * @param emailDialog calling instance of the EmailDialog class
+     * @param testing if unit testing, expected to contain only one element with its value set to
+     *                true; null otherwise
+     * @return a list of key value pairs with keys 'title', 'description' and 'address'
+     */
+    static List<HashMap<String, String>> getAllDetails(Context context, EmailDialog emailDialog,
+                                                       boolean[] testing) {
         return null;
     }
 }
