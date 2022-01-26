@@ -6,10 +6,10 @@
 class AllTest extends \PHPUnit\Framework\TestCase {
 
     /**
-     * This function tests getQRStrings() for the all qr strings stored in our database 
+     * This function tests getQRStrings() for all qr strings stored in our database
      */
-	function testGetQRStrings() {
-		require_once('GetQRStrings.php');
+    function testGetQRStrings() {
+        require_once('GetQRStrings.php');
 
         $expected = array("Lab 1", "Lab 2", "Unit Testing");
 
@@ -17,7 +17,7 @@ class AllTest extends \PHPUnit\Framework\TestCase {
         sort($actual);
 
         $this->assertSame($expected, $actual);
-	}
+    }
     
     /**
      * This function tests getTitle() for all titles stored under qr string 'Unit Testing'
@@ -32,7 +32,7 @@ class AllTest extends \PHPUnit\Framework\TestCase {
     }
     
     /**
-     * This functions tests getDetails() with various combinations of the following:
+     * This function tests getDetails() with various combinations of the following:
      * - description without picture or video
      * - picture without description
      * - video without description
@@ -196,7 +196,7 @@ class AllTest extends \PHPUnit\Framework\TestCase {
     }
 
     /**
-     * This functions tests getAllDetails() with various combinations of the following:
+     * This function tests getAllDetails() with various combinations of the following:
      * - description without picture or video
      * - picture without description
      * - video without description
