@@ -4,12 +4,24 @@ import android.content.Context;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 /**
  * This class contains methods that get info from PHP files stored on server
  */
 public class DBHelper {
     static String currentQRString;
+
+    /**
+     * Gets all the qr strings from database
+     * @param context context of the application
+     * @param testing if unit testing, expected to contain only one element with its value set to
+     *                true; null otherwise
+     * @return a set of qr strings
+     */
+    static Set<String> getQRStrings(Context context, boolean[] testing) {
+        return null;
+    }
 
     /**
      * Gets details for all the entries from database that match the 'currentQRString' and

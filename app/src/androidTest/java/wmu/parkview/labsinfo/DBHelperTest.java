@@ -9,12 +9,35 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * This class contains tests for methods in DBHelper class
  */
 public class DBHelperTest {
+
+    /**
+     * This method tests getQRStrings() for all qr strings stored in our database
+     */
+    @Test
+    public void getQRStrings() {
+        Set<String> expected = new HashSet<>();
+        expected.add("Lab 1");
+        expected.add("Lab 2");
+        expected.add("Unit Testing");
+
+        boolean[] testing = new boolean[1];
+        testing[0] = true;
+
+        Set<String> actual = DBHelper.getQRStrings(ApplicationProvider.getApplicationContext(),
+                testing);
+
+        while (testing[0]);
+
+        assertEquals(expected, actual);
+    }
 
     /**
      * This method tests getDetails() with various combinations of the following:
