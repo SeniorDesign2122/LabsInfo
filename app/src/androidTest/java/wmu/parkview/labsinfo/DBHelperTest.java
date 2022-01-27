@@ -40,6 +40,39 @@ public class DBHelperTest {
     }
 
     /**
+     * This method tests getTitle() for all titles stored under qr string 'Unit Testing'
+     */
+    @Test
+    public void getTitles() {
+        List<String> expected = new ArrayList<>();
+        expected.add("Case A");
+        expected.add("Case B");
+        expected.add("Case C");
+        expected.add("Case D");
+        expected.add("Case E");
+        expected.add("Case F");
+        expected.add("Case G");
+        expected.add("Case H");
+        expected.add("Case I");
+        expected.add("Case J");
+        expected.add("Case K");
+        expected.add("Case L");
+        expected.add("Case M");
+
+        boolean[] testing = new boolean[1];
+        testing[0] = true;
+
+        DBHelper.currentQRString = "Unit Testing";
+
+        List<String> actual = DBHelper.getTitles(ApplicationProvider.getApplicationContext(),
+                testing);
+
+        while (testing[0]);
+
+        assertEquals(expected, actual);
+    }
+
+    /**
      * This method tests getDetails() with various combinations of the following:
      * - description without picture or video
      * - picture without description

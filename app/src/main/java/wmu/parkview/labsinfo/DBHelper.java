@@ -24,6 +24,17 @@ public class DBHelper {
     }
 
     /**
+     * Gets all the titles for 'currentQRString' from database
+     * @param context context of the application
+     * @param testing if unit testing, expected to contain only one element with its value set to
+     *                true; null otherwise
+     * @return a set of titles
+     */
+    static List<String> getTitles(Context context, boolean[] testing) {
+        return null;
+    }
+
+    /**
      * Gets details for all the entries from database that match the 'currentQRString' and
      * received 'title'
      * @param context context of the application
