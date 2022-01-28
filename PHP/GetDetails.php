@@ -3,7 +3,7 @@ require_once('Config.php');
 
 /**
  * Gets details for all the entries from database that match the received 'qRString' and 'title'
- * @param string $qRString the qr string string in database to which the query should be restricted to
+ * @param string $qRString the qr string in database to which the query should be restricted to
  * @param string $title the title string in database to which the query should be restricted to
  * @return array an associative array with keys 'description' and 'address'
  */
