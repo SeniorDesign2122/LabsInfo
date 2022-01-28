@@ -3,7 +3,7 @@ require_once('Config.php');
 
 /**
  * Gets all the titles for 'qRString' from database
- * @param string $qRString the qr string string in database to which the query should be restricted to
+ * @param string $qRString the qr string in database to which the query should be restricted to
  * @return array contains titles
  */
 function getTitles($qRString) {
