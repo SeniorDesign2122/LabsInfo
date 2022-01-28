@@ -28,7 +28,7 @@ public class DBHelper {
      * @param context context of the application
      * @param testing if unit testing, expected to contain only one element with its value set to
      *                true; null otherwise
-     * @return a set of titles
+     * @return a list of titles
      */
     static List<String> getTitles(Context context, boolean[] testing) {
         return null;
