@@ -44,7 +44,38 @@ public class DBHelper {
      * @return a list of titles
      */
     static List<String> getTitles(Context context, boolean[] testing) {
-        return null;
+        List<String> titles = new ArrayList<>();
+
+        StringRequest request = new StringRequest(Request.Method.GET, DIRECTORY +
+                "GetTitles.php?qr_string=" + currentQRString, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONArray array = new JSONArray(response);
+
+                    for (int i = 0; i < array.length(); i++)
+                        titles.add(array.getString(i));
+
+                    if (testing == null) {
+                        ((ListActivity) context).titlesLoaded();
+                    } else {
+                        testing[0] = false;
+                    }
+                } catch (Exception e) {
+                    Toast.makeText(context, R.string.get_db_data_error,
+                            Toast.LENGTH_LONG).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, R.string.db_connect_error, Toast.LENGTH_LONG).show();
+            }
+        });
+
+        Volley.newRequestQueue(context).add(request);
+
+        return titles;
     }
 
     /**
