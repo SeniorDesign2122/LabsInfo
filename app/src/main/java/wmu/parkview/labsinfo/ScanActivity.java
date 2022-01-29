@@ -54,4 +54,12 @@ public class ScanActivity extends AppCompatActivity {
             mCamPermissionGranted = true;
         }
     }
+    
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (mCamPermissionGranted) {
+            mCodeScanner.startPreview();
+        }
+    }
 }
