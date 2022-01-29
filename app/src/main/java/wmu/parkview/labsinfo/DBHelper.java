@@ -141,6 +141,45 @@ public class DBHelper {
      */
     static List<HashMap<String, String>> getAllDetails(Context context, EmailDialog emailDialog,
                                                        boolean[] testing) {
-        return null;
+        List<HashMap<String, String>> details = new ArrayList<>();
+
+        StringRequest request = new StringRequest(Request.Method.GET, DIRECTORY +
+                "GetAllDetails.php?qr_string=" + currentQRString, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONArray array = new JSONArray(response);
+
+                    for (int i = 0; i < array.length(); i++) {
+                        JSONObject object = array.getJSONObject(i);
+
+                        HashMap<String, String> detail = new HashMap<>();
+                        detail.put("title", object.getString("title"));
+                        detail.put("description", object.getString("description"));
+                        detail.put("address", object.getString("address"));
+
+                        details.add(detail);
+                    }
+
+                    if (testing == null) {
+                        ((EmailDialog) emailDialog).allDetailsLoadedForEmail();
+                    } else {
+                        testing[0] = false;
+                    }
+                } catch (Exception e) {
+                    Toast.makeText(context, R.string.get_db_data_error,
+                            Toast.LENGTH_LONG).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, R.string.db_connect_error, Toast.LENGTH_LONG).show();
+            }
+        });
+
+        Volley.newRequestQueue(context).add(request);
+
+        return details;
     }
 }
