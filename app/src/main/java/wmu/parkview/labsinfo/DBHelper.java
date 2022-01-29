@@ -14,6 +14,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -33,7 +34,34 @@ public class DBHelper {
      * @return a set of qr strings
      */
     static Set<String> getQRStrings(Context context, boolean[] testing) {
-        return null;
+        Set<String> qRStrings = new HashSet<>();
+
+        StringRequest request = new StringRequest(Request.Method.GET, DIRECTORY +
+                "GetQRStrings.php", new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONArray array = new JSONArray(response);
+
+                    for (int i = 0; i < array.length(); i++)
+                        qRStrings.add(array.getString(i));
+
+                    if (testing != null) testing[0] = false;
+                } catch (Exception e) {
+                    Toast.makeText(context, R.string.get_db_data_error,
+                            Toast.LENGTH_LONG).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, R.string.db_connect_error, Toast.LENGTH_LONG).show();
+            }
+        });
+
+        Volley.newRequestQueue(context).add(request);
+
+        return qRStrings;
     }
 
     /**
