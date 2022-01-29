@@ -21,4 +21,11 @@ public class EmailDialog extends DialogFragment {
         return null;
     }
 
+    /**
+     * Expects to be called by DBHelper when all details loaded from database are ready to use
+     */
+    void allDetailsLoadedForEmail() {
+
+    }
+
 }
