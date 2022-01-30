@@ -62,4 +62,10 @@ public class ScanActivity extends AppCompatActivity {
             mCodeScanner.startPreview();
         }
     }
+
+    @Override
+    protected void onPause() {
+        mCodeScanner.releaseResources();
+        super.onPause();
+    }
 }
