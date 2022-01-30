@@ -54,7 +54,21 @@ public class ScanActivity extends AppCompatActivity {
             mCamPermissionGranted = true;
         }
     }
-    
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == CAMERA_PERMISSION_CODE) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                mCamPermissionGranted = true;
+                mCodeScanner.startPreview();
+            } else {
+                mCamPermissionGranted = false;
+            }
+        }
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
