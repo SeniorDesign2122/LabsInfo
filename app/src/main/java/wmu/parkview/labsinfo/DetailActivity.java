@@ -43,7 +43,23 @@ public class DetailActivity extends YouTubeBaseActivity {
      * Expects to be called by DBHelper when details loaded from database are ready to use
      */
     void detailsLoaded() {
+        for (int i = 0; i < mDetails.size(); i++) {
+            if (!mDetails.get(i).get("address").equals("")) {
+                if (mDetails.get(i).get("address").startsWith("https://www.youtube.com/watch?v=")) {
+                    int endIndex = mDetails.get(i).get("address").indexOf('&');
 
+                    if (endIndex != -1) {
+                        addVideo(mDetails.get(i).get("address").substring(32, endIndex));
+                    } else {
+                        addVideo(mDetails.get(i).get("address").substring(32));
+                    }
+                } else {
+                    addImage(mDetails.get(i).get("address"));
+                }
+            }
+
+            addDescription(mDetails.get(i).get("description"));
+        }
     }
 
     /**
