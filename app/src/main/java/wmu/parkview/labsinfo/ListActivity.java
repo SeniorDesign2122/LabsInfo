@@ -43,7 +43,7 @@ public class ListActivity extends AppCompatActivity {
      * Expects to be called by DBHelper when titles loaded from database are ready to use
      */
     void titlesLoaded() {
-
+        mRView.setAdapter(new Adapter());
     }
 
     @Override
