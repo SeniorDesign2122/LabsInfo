@@ -1,11 +1,16 @@
 package wmu.parkview.labsinfo;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
 import com.google.android.youtube.player.YouTubeBaseActivity;
+import com.google.android.youtube.player.YouTubeInitializationResult;
+import com.google.android.youtube.player.YouTubePlayer;
+import com.google.android.youtube.player.YouTubePlayerView;
 
 import java.util.HashMap;
 import java.util.List;
@@ -37,4 +42,36 @@ public class DetailActivity extends YouTubeBaseActivity {
 
     }
 
+    /**
+     * Adds a YouTube player to the linear layout and loads a YouTube video in it
+     * @param identifier identifier of the YouTube video to load
+     */
+    private void addVideo(String identifier) {
+        YouTubePlayerView youTubeView = new YouTubePlayerView(this);
+        youTubeView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                youTubeView.initialize("AIzaSyDeXhr4cc1LFn6u6yPqI_sErEJE9JJmu2Y",
+                        new YouTubePlayer.OnInitializedListener() {
+                            @Override
+                            public void onInitializationSuccess(YouTubePlayer.Provider provider,
+                                                                YouTubePlayer youTubePlayer,
+                                                                boolean b) {
+                                youTubePlayer.setShowFullscreenButton(false);
+                                youTubePlayer.loadVideo(identifier);
+                            }
+
+                            @Override
+                            public void onInitializationFailure(YouTubePlayer.Provider provider,
+                                                                YouTubeInitializationResult
+                                                                        youTubeInitializationResult)
+                            {
+                                Toast.makeText(DetailActivity.this, R.string.video_error,
+                                        Toast.LENGTH_LONG).show();
+                            }
+                        });
+            }
+        });
+        mLVLayout.addView(youTubeView);
+    }
 }
