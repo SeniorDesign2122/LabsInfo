@@ -1,7 +1,11 @@
 package wmu.parkview.labsinfo;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -36,5 +40,24 @@ public class ListActivity extends AppCompatActivity {
      */
     void titlesLoaded() {
 
+    }
+    
+    private class ViewHolder extends RecyclerView.ViewHolder {
+        TextView mTView;
+
+        ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            mTView = itemView.findViewById(R.id.list_item_text);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(ListActivity.this,
+                            DetailActivity.class);
+                    intent.putExtra("title", mTView.getText());
+                    startActivity(intent);
+                }
+            });
+        }
     }
 }
