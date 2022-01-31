@@ -7,7 +7,10 @@
         <entry key="app/src/main/res/layout/activity_list.xml" value="0.1322463768115942" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.15070921985815602" />
         <entry key="app/src/main/res/layout/activity_scan.xml" value="0.1322463768115942" />
+        <entry key="app/src/main/res/layout/dialog_email.xml" value="0.11195542046605876" />
         <entry key="app/src/main/res/layout/list_item.xml" value="0.11195542046605876" />
+        <entry key="app/src/main/res/menu/activity_list.xml" value="0.22666666666666666" />
+        <entry key="app/src/main/res/xml/cache_paths.xml" value="0.11195542046605876" />
       </map>
     </option>
   </component>
