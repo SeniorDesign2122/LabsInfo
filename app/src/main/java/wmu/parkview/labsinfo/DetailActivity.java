@@ -1,9 +1,11 @@
 package wmu.parkview.labsinfo;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -42,6 +44,19 @@ public class DetailActivity extends YouTubeBaseActivity {
      */
     void detailsLoaded() {
 
+    }
+
+    /**
+     * Adds text to the Linear Layout
+     * @param description the text to add
+     */
+    private void addDescription(String description) {
+        TextView textView = new TextView(this);
+        textView.setTextColor(Color.BLACK);
+        textView.setTextSize(20);
+        textView.setPadding(0, 20, 0, 50);
+        textView.setText(description);
+        mLVLayout.addView(textView);
     }
 
     /**
