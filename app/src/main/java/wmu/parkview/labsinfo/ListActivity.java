@@ -3,6 +3,8 @@ package wmu.parkview.labsinfo;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -42,6 +44,22 @@ public class ListActivity extends AppCompatActivity {
      */
     void titlesLoaded() {
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.activity_list, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.send_email) {
+            new EmailDialog().show(getSupportFragmentManager(), "EmailDialog");
+            return true;
+        } else {
+            return super.onOptionsItemSelected(item);
+        }
     }
 
     private class Adapter extends RecyclerView.Adapter<ViewHolder> {
