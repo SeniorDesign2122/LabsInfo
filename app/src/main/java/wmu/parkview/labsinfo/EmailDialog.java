@@ -3,6 +3,8 @@ package wmu.parkview.labsinfo;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -24,6 +27,7 @@ public class EmailDialog extends DialogFragment {
 
     private ListActivity mListActivity;
     private List<HashMap<String, String>> mAllDetails;
+    private ArrayList<Uri> mPicUris;
 
     @NonNull
     @Override
@@ -48,6 +52,19 @@ public class EmailDialog extends DialogFragment {
      */
     void allDetailsLoadedForEmail() {
 
+    }
+    
+    /**
+     * Expects to be called when URIs for all pics have been loaded into 'mPicUris'
+     */
+    private void picUrisLoaded() {
+        Intent intent = new Intent(Intent.ACTION_SEND_MULTIPLE);
+        intent.setType("message/rfc822");
+        intent.putExtra(Intent.EXTRA_EMAIL, new String[] { mEmail.getText().toString() });
+        intent.putExtra(Intent.EXTRA_SUBJECT, "WMU CEAS Tour - " + DBHelper.currentQRString);
+        intent.putExtra(Intent.EXTRA_TEXT, getEmailText(mAllDetails));
+        intent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, mPicUris);
+        mListActivity.startActivity(intent);
     }
 
     /**
