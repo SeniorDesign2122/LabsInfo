@@ -4,16 +4,26 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.FileProvider;
 import androidx.fragment.app.DialogFragment;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.CustomTarget;
+import com.bumptech.glide.request.transition.Transition;
+
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -28,6 +38,7 @@ public class EmailDialog extends DialogFragment {
     private ListActivity mListActivity;
     private List<HashMap<String, String>> mAllDetails;
     private ArrayList<Uri> mPicUris;
+    private int mPicUrisExpectedSize;
 
     @NonNull
     @Override
@@ -75,5 +86,54 @@ public class EmailDialog extends DialogFragment {
      */
     String getEmailText(List<HashMap<String, String>> allDetails) {
         return null;
+    }
+
+    /**
+     * Stores all pictures referenced in 'mAllDetails' into cache
+     * @return the list which will contain URIs for all pics
+     */
+    private ArrayList<Uri> getPicUris() {
+        ArrayList<Uri> picUris = new ArrayList<>();
+
+        for (int i = 0; i < mAllDetails.size(); i++) {
+            if (!mAllDetails.get(i).get("address").startsWith("https://www.youtube.com/watch?v=") &&
+                    !mAllDetails.get(i).get("address").equals("")) {
+                String picName = mAllDetails.get(i).get("address").substring(mAllDetails.get(i).
+                        get("address").lastIndexOf('/') + 1, mAllDetails.get(i).get("address").
+                        lastIndexOf('.'));
+
+                Glide.with(mListActivity).asBitmap().load(mAllDetails.get(i).get("address")).into(
+                        new CustomTarget<Bitmap>() {
+                            @Override
+                            public void onResourceReady(@NonNull Bitmap resource, @Nullable
+                                    Transition<? super Bitmap> transition) {
+                                try {
+                                    File file = new File(mListActivity.getCacheDir(), picName
+                                            + ".jpg");
+                                    if (file.exists()) file.delete();
+
+                                    FileOutputStream fOutStream = new FileOutputStream(file);
+                                    resource.compress(Bitmap.CompressFormat.JPEG, 100,
+                                            fOutStream);
+                                    fOutStream.flush();
+                                    fOutStream.close();
+
+                                    picUris.add(FileProvider.getUriForFile(mListActivity,
+                                            "wmu.ceas.labsinfo.fileprovider", file));
+
+                                    if (mPicUris.size() == mPicUrisExpectedSize) picUrisLoaded();
+                                } catch (Exception e) {
+                                    Toast.makeText(mListActivity, R.string.email_picture_error,
+                                            Toast.LENGTH_LONG).show();
+                                }
+                            }
+
+                            @Override
+                            public void onLoadCleared(@Nullable Drawable placeholder) {}
+                        });
+            }
+        }
+
+        return picUris;
     }
 }
