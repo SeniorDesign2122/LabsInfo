@@ -85,7 +85,36 @@ public class EmailDialog extends DialogFragment {
      * @return a formatted string
      */
     String getEmailText(List<HashMap<String, String>> allDetails) {
-        return null;
+        StringBuilder sBuilder = new StringBuilder("Dear Future Bronco,\n\n We are really " +
+                "excited that you are considering WMU!\n\nHere are some " +
+                "details about ").append(DBHelper.currentQRString).append(":\n");
+
+        boolean extraNewLineNeeded = false;
+
+        for (int i = 0; i < allDetails.size(); i++) {
+            if (!(i > 0 && allDetails.get(i).get("title").equals(allDetails.get(i - 1).
+                    get("title")))) {
+                if (extraNewLineNeeded) sBuilder.append("\n");
+                extraNewLineNeeded = true;
+
+                sBuilder.append("\n").append(allDetails.get(i).get("title")).append("\n");
+            }
+
+            if (allDetails.get(i).get("address").startsWith("https://www.youtube.com/watch?v=")) {
+                sBuilder.append("YouTube Link: ").append(allDetails.get(i).get("address")).
+                        append("\n");
+                extraNewLineNeeded = true;
+            }
+
+            if (!allDetails.get(i).get("description").equals("")) {
+                sBuilder.append(allDetails.get(i).get("description")).append("\n\n");
+                extraNewLineNeeded = false;
+            }
+        }
+
+        sBuilder.append("\nRegards,\nWMU CEAS Tours Team");
+
+        return sBuilder.toString();
     }
 
     /**
