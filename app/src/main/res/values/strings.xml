@@ -5,4 +5,6 @@
     <string name="db_connect_error">Could not connect to database</string>
 
     <string name="send_as_email">Send as Email</string>
+
+    <string name="video_error">Could not connect to YouTube</string>
 </resources>
