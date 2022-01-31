@@ -35,6 +35,16 @@
             android:name=".DetailActivity"
             android:parentActivityName=".ListActivity"
             android:screenOrientation="portrait" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="wmu.parkview.labsinfo.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/cache_paths" />
+        </provider>
     </application>
 
     <queries>
