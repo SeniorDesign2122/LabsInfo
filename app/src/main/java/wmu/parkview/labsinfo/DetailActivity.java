@@ -2,11 +2,13 @@ package wmu.parkview.labsinfo;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
+import com.bumptech.glide.Glide;
 import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
@@ -40,6 +42,17 @@ public class DetailActivity extends YouTubeBaseActivity {
      */
     void detailsLoaded() {
 
+    }
+
+    /**
+     * Adds image at the received 'URL' to the Linear Layout
+     * @param address URL of the image to add
+     */
+    private void addImage(String address) {
+        ImageView imgView = new ImageView(this);
+        imgView.setAdjustViewBounds(true);
+        Glide.with(this).load(address).into(imgView);
+        mLVLayout.addView(imgView);
     }
 
     /**
