@@ -3,4 +3,6 @@
 
     <string name="get_db_data_error">Could not get data from database</string>
     <string name="db_connect_error">Could not connect to database</string>
+
+    <string name="send_as_email">Send as Email</string>
 </resources>
