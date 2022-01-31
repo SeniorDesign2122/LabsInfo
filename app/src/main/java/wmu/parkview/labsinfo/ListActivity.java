@@ -2,7 +2,9 @@ package wmu.parkview.labsinfo;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -40,6 +42,25 @@ public class ListActivity extends AppCompatActivity {
      */
     void titlesLoaded() {
 
+    }
+
+    private class Adapter extends RecyclerView.Adapter<ViewHolder> {
+        @NonNull
+        @Override
+        public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            return new ViewHolder(LayoutInflater.from(ListActivity.this).inflate(
+                    R.layout.list_item, parent, false));
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+            holder.mTView.setText(mTitles.get(position));
+        }
+
+        @Override
+        public int getItemCount() {
+            return mTitles.size();
+        }
     }
     
     private class ViewHolder extends RecyclerView.ViewHolder {
