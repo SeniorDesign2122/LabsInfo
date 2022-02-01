@@ -62,7 +62,14 @@ public class EmailDialog extends DialogFragment {
      * Expects to be called by DBHelper when all details loaded from database are ready to use
      */
     void allDetailsLoadedForEmail() {
+        mPicUrisExpectedSize = 0;
 
+        for (int i = 0; i < mAllDetails.size(); i++)
+            if (!mAllDetails.get(i).get("address").startsWith("https://www.youtube.com/watch?v=") &&
+                    !mAllDetails.get(i).get("address").equals(""))
+                mPicUrisExpectedSize++;
+
+        mPicUris = getPicUris();
     }
     
     /**
