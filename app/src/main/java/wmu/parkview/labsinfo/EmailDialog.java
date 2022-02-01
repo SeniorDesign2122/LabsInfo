@@ -155,7 +155,7 @@ public class EmailDialog extends DialogFragment {
                                     fOutStream.close();
 
                                     picUris.add(FileProvider.getUriForFile(mListActivity,
-                                            "wmu.ceas.labsinfo.fileprovider", file));
+                                            "wmu.parkview.labsinfo.fileprovider", file));
 
                                     if (mPicUris.size() == mPicUrisExpectedSize) picUrisLoaded();
                                 } catch (Exception e) {
