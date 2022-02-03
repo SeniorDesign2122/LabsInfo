@@ -69,7 +69,11 @@ public class EmailDialog extends DialogFragment {
                     !mAllDetails.get(i).get("address").equals(""))
                 mPicUrisExpectedSize++;
 
-        mPicUris = getPicUris();
+        if (mPicUrisExpectedSize != 0) {
+            mPicUris = getPicUris();
+        } else {
+            picUrisLoaded();
+        }
     }
     
     /**
