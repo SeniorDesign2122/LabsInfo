@@ -118,7 +118,13 @@ public class EmailDialog extends DialogFragment {
             }
 
             if (!allDetails.get(i).get("description").equals("")) {
-                sBuilder.append(allDetails.get(i).get("description")).append("\n\n");
+                String description = allDetails.get(i).get("description");
+
+                description = description.replaceAll("<a href=\"", "");
+                description = description.replaceAll("\">", " (");
+                description = description.replaceAll("</a>", ")");
+
+                sBuilder.append(description).append("\n\n");
                 extraNewLineNeeded = false;
             }
         }

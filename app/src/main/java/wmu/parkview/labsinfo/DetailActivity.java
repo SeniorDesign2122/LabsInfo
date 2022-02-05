@@ -2,6 +2,8 @@ package wmu.parkview.labsinfo;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -71,7 +73,8 @@ public class DetailActivity extends YouTubeBaseActivity {
         textView.setTextColor(Color.BLACK);
         textView.setTextSize(20);
         textView.setPadding(0, 20, 0, 50);
-        textView.setText(description);
+        textView.setText(Html.fromHtml(description, Html.FROM_HTML_MODE_LEGACY));
+        textView.setMovementMethod(LinkMovementMethod.getInstance());
         mLVLayout.addView(textView);
     }
 
