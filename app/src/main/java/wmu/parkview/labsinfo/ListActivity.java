@@ -79,8 +79,13 @@ public class ListActivity extends AppCompatActivity {
         @Override
         public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
             holder.mTView.setText(mTitles.get(position).get("title"));
-            Glide.with(ListActivity.this).load(mTitles.get(position).get("thumb_address"))
-                    .into(holder.mIView);
+
+            if (!mTitles.get(position).get("thumb_address").equals("")) {
+                Glide.with(ListActivity.this).load(mTitles.get(position).
+                        get("thumb_address")).into(holder.mIView);
+            } else {
+                holder.mIView.setImageResource(R.drawable.wmu_logo);
+            }
         }
 
         @Override
