@@ -11,26 +11,68 @@ class AllTest extends \PHPUnit\Framework\TestCase {
     function testGetQRStrings() {
         require_once('GetQRStrings.php');
 
-        $expected = array("Lab 1", "Lab 2", "Unit Testing");
+        $expected = array("Lab 0", "Lab 1", "Lab 2", "Unit Testing");
 
         $actual = getQRStrings();
         sort($actual);
 
         $this->assertSame($expected, $actual);
     }
-    
+
     /**
-     * This function tests getTitle() for all titles stored under qr string 'Unit Testing'
+     * This function tests getTitle() for all titles stored under qr string 'Unit Testing' and their corresponding
+     * thumbnails
      */
     function testGetTitles() {
         require_once('GetTitles.php');
 
-        $expected = array("Case A", "Case B", "Case C", "Case D", "Case E", "Case F", "Case G", "Case H", "Case I",
-            "Case J", "Case K", "Case L", "Case M");
+        $expected = array();
+
+        array_push($expected, array('title'=>"Case A",
+            'thumb_address'=>""));
+
+        array_push($expected, array('title'=>"Case B",
+            'thumb_address'=>"http://mshop.cs.wmich.edu/tablet/Pics/Unit Testing/Chevrolet Traverse.jpeg"));
+
+        array_push($expected, array('title'=>"Case C",
+            'thumb_address'=>""));
+
+        array_push($expected, array('title'=>"Case D",
+            'thumb_address'=>"http://mshop.cs.wmich.edu/tablet/Pics/Unit Testing/GMC Sierra.jpeg"));
+
+        array_push($expected, array('title'=>"Case E",
+            'thumb_address'=>""));
+
+        array_push($expected, array('title'=>"Case F",
+            'thumb_address'=>"http://mshop.cs.wmich.edu/tablet/Pics/Unit Testing/Chevrolet Silverado.jpeg"));
+
+        array_push($expected, array('title'=>"Case G",
+            'thumb_address'=>"http://mshop.cs.wmich.edu/tablet/Pics/Unit Testing/Chevrolet Equinox.jpeg"));
+
+        array_push($expected, array('title'=>"Case H",
+            'thumb_address'=>"https://cdn.vox-cdn.com/thumbor/Qz4JriwqoF--DwDdVZQPuALxNek=/1400x1400/filters:format" .
+                "(jpeg)/cdn.vox-cdn.com/uploads/chorus_asset/file/22526630/2_16x9.jpg"));
+
+        array_push($expected, array('title'=>"Case I",
+            'thumb_address'=>""));
+
+        array_push($expected, array('title'=>"Case J",
+            'thumb_address'=>"https://www.topgear.com/sites/default/files/cars-car/image/2018/05/ford_2018_fiesta_" .
+                "st_3door_02.jpg"));
+
+        array_push($expected, array('title'=>"Case K",
+            'thumb_address'=>"https://cdn.motor1.com/images/mgl/4yv4K/s1/ford-focus-st-edition-front.jpg"));
+
+        array_push($expected, array('title'=>"Case L",
+            'thumb_address'=>""));
+
+        array_push($expected, array('title'=>"Case M",
+            'thumb_address'=>"https://www.ford.com/is/image/content/dam/brand_ford/en_us/brand/cars/mustang/brand_" .
+                "mustang/dm/21_FRD_MST_wdmp_200510_00360.tif?croppathe=1_3x2&wid=1440"));
 
         $this->assertSame($expected, getTitles("Unit Testing"));
     }
-    
+
     /**
      * This function tests getDetails() with various combinations of the following:
      * - description without picture or video
