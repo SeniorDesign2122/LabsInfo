@@ -1,12 +1,14 @@
 package wmu.parkview.labsinfo;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,15 +17,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
+import java.util.HashMap;
 import java.util.List;
 
 /**
- * This activity gets titles for the current qr string and adds them to its recycler view
+ * This activity gets titles and their corresponding thumbnails for the current qr string and adds
+ * them to its recycler view
  */
 public class ListActivity extends AppCompatActivity {
     private RecyclerView mRView;
 
-    private List<String> mTitles;
+    private List<HashMap<String, String>> mTitles;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -72,7 +78,9 @@ public class ListActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-            holder.mTView.setText(mTitles.get(position));
+            holder.mTView.setText(mTitles.get(position).get("title"));
+            Glide.with(ListActivity.this).load(mTitles.get(position).get("thumb_address"))
+                    .into(holder.mIView);
         }
 
         @Override
@@ -80,13 +88,15 @@ public class ListActivity extends AppCompatActivity {
             return mTitles.size();
         }
     }
-    
+
     private class ViewHolder extends RecyclerView.ViewHolder {
         TextView mTView;
+        ImageView mIView;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
             mTView = itemView.findViewById(R.id.list_item_text);
+            mIView = itemView.findViewById(R.id.list_item_img);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

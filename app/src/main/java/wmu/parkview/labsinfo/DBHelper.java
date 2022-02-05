@@ -65,14 +65,14 @@ public class DBHelper {
     }
 
     /**
-     * Gets all the titles for 'currentQRString' from database
+     * Gets all the titles for 'currentQRString' from database along with their thumbnails
      * @param context context of the application
      * @param testing if unit testing, expected to contain only one element with its value set to
      *                true; null otherwise
-     * @return a list of titles
+     * @return a list of key value pairs with keys 'title' and 'thumb_address'
      */
-    static List<String> getTitles(Context context, boolean[] testing) {
-        List<String> titles = new ArrayList<>();
+    static List<HashMap<String, String>> getTitles(Context context, boolean[] testing) {
+        List<HashMap<String, String>> titles = new ArrayList<>();
 
         StringRequest request = new StringRequest(Request.Method.GET, DIRECTORY +
                 "GetTitles.php?qr_string=" + currentQRString, new Response.Listener<String>() {
@@ -81,8 +81,15 @@ public class DBHelper {
                 try {
                     JSONArray array = new JSONArray(response);
 
-                    for (int i = 0; i < array.length(); i++)
-                        titles.add(array.getString(i));
+                    for (int i = 0; i < array.length(); i++) {
+                        JSONObject object = array.getJSONObject(i);
+
+                        HashMap<String, String> detail = new HashMap<>();
+                        detail.put("title", object.getString("title"));
+                        detail.put("thumb_address", object.getString("thumb_address"));
+
+                        titles.add(detail);
+                    }
 
                     if (testing == null) {
                         ((ListActivity) context).titlesLoaded();

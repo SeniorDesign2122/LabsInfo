@@ -24,6 +24,7 @@ public class DBHelperTest {
     @Test
     public void getQRStrings() {
         Set<String> expected = new HashSet<>();
+        expected.add("Lab 0");
         expected.add("Lab 1");
         expected.add("Lab 2");
         expected.add("Unit Testing");
@@ -40,32 +41,96 @@ public class DBHelperTest {
     }
 
     /**
-     * This method tests getTitle() for all titles stored under qr string 'Unit Testing'
+     * This method tests getTitle() for all titles stored under qr string 'Unit Testing' and their
+     * corresponding thumbnails
      */
     @Test
     public void getTitles() {
-        List<String> expected = new ArrayList<>();
-        expected.add("Case A");
-        expected.add("Case B");
-        expected.add("Case C");
-        expected.add("Case D");
-        expected.add("Case E");
-        expected.add("Case F");
-        expected.add("Case G");
-        expected.add("Case H");
-        expected.add("Case I");
-        expected.add("Case J");
-        expected.add("Case K");
-        expected.add("Case L");
-        expected.add("Case M");
+        List<HashMap<String, String>> expected = new ArrayList<>();
+        HashMap<String, String> entry;
+
+        entry = new HashMap<>();
+        entry.put("title", "Case A");
+        entry.put("thumb_address", "");
+        expected.add(entry);
+
+        entry = new HashMap<>();
+        entry.put("title", "Case B");
+        entry.put("thumb_address", "http://mshop.cs.wmich.edu/tablet/Pics/Unit Testing/Chevrolet " +
+                "Traverse.jpeg");
+        expected.add(entry);
+
+        entry = new HashMap<>();
+        entry.put("title", "Case C");
+        entry.put("thumb_address", "");
+        expected.add(entry);
+
+        entry = new HashMap<>();
+        entry.put("title", "Case D");
+        entry.put("thumb_address", "http://mshop.cs.wmich.edu/tablet/Pics/Unit Testing/GMC " +
+                "Sierra.jpeg");
+        expected.add(entry);
+
+        entry = new HashMap<>();
+        entry.put("title", "Case E");
+        entry.put("thumb_address", "");
+        expected.add(entry);
+
+        entry = new HashMap<>();
+        entry.put("title", "Case F");
+        entry.put("thumb_address", "http://mshop.cs.wmich.edu/tablet/Pics/Unit Testing/Chevrolet " +
+                "Silverado.jpeg");
+        expected.add(entry);
+
+        entry = new HashMap<>();
+        entry.put("title", "Case G");
+        entry.put("thumb_address", "http://mshop.cs.wmich.edu/tablet/Pics/Unit Testing/Chevrolet " +
+                "Equinox.jpeg");
+        expected.add(entry);
+
+        entry = new HashMap<>();
+        entry.put("title", "Case H");
+        entry.put("thumb_address", "https://cdn.vox-cdn.com/thumbor/Qz4JriwqoF--DwDdVZQPuALxNek=" +
+                "/1400x1400/filters:format(jpeg)/cdn.vox-cdn.com/uploads/chorus_asset/file/" +
+                "22526630/2_16x9.jpg");
+        expected.add(entry);
+
+        entry = new HashMap<>();
+        entry.put("title", "Case I");
+        entry.put("thumb_address", "");
+        expected.add(entry);
+
+        entry = new HashMap<>();
+        entry.put("title", "Case J");
+        entry.put("thumb_address", "https://www.topgear.com/sites/default/files/cars-car/image/" +
+                "2018/05/ford_2018_fiesta_st_3door_02.jpg");
+        expected.add(entry);
+
+        entry = new HashMap<>();
+        entry.put("title", "Case K");
+        entry.put("thumb_address", "https://cdn.motor1.com/images/mgl/4yv4K/s1/ford-focus-st-" +
+                "edition-front.jpg");
+        expected.add(entry);
+
+        entry = new HashMap<>();
+        entry.put("title", "Case L");
+        entry.put("thumb_address", "");
+        expected.add(entry);
+
+        entry = new HashMap<>();
+        entry.put("title", "Case M");
+        entry.put("thumb_address", "https://www.ford.com/is/image/content/dam/brand_ford/en_us/" +
+                "brand/cars/mustang/brand_mustang/dm/21_FRD_MST_wdmp_200510_00360.tif?croppathe=1" +
+                "_3x2&wid=1440");
+        expected.add(entry);
 
         boolean[] testing = new boolean[1];
         testing[0] = true;
 
         DBHelper.currentQRString = "Unit Testing";
 
-        List<String> actual = DBHelper.getTitles(ApplicationProvider.getApplicationContext(),
-                testing);
+        List<HashMap<String, String>> actual = DBHelper.getTitles(
+                ApplicationProvider.getApplicationContext(), testing);
 
         while (testing[0]);
 
