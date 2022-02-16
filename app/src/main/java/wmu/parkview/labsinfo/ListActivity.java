@@ -41,7 +41,11 @@ public class ListActivity extends AppCompatActivity {
 
         mRView = findViewById(R.id.recycler_view);
         mRView.setLayoutManager(new LinearLayoutManager(this));
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
         mTitles = DBHelper.getTitles(this, null);
     }
 

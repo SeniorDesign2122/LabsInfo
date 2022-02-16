@@ -36,7 +36,12 @@ public class DetailActivity extends YouTubeBaseActivity {
         setContentView(R.layout.activity_detail);
 
         mLVLayout = findViewById(R.id.detail_vertical_layout);
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mLVLayout.removeAllViews();
         mDetails = DBHelper.getDetails(this, getIntent().getStringExtra("title"),
                 null);
     }
