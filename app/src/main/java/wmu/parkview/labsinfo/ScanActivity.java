@@ -23,6 +23,7 @@ public class ScanActivity extends AppCompatActivity {
 
     private CodeScanner mCodeScanner;
 
+    private Set<String> mQRStrings;
     private boolean mCamPermissionGranted;
 
     @Override
@@ -34,12 +35,10 @@ public class ScanActivity extends AppCompatActivity {
 
         mCodeScanner.setScanMode(ScanMode.CONTINUOUS);
 
-        Set<String> qRStrings = DBHelper.getQRStrings(this, null);
-
         mCodeScanner.setDecodeCallback(new DecodeCallback() {
             @Override
             public void onDecoded(@NonNull final Result result) {
-                if (qRStrings.contains(result.getText())) {
+                if (mQRStrings.contains(result.getText())) {
                     Intent intent = new Intent(ScanActivity.this, ListActivity.class);
                     intent.putExtra("qRString", result.getText());
                     startActivity(intent);
@@ -72,6 +71,9 @@ public class ScanActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+
+        mQRStrings = DBHelper.getQRStrings(this, null);
+
         if (mCamPermissionGranted) {
             mCodeScanner.startPreview();
         }
