@@ -71,12 +71,8 @@ public class ScanActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
         mQRStrings = DBHelper.getQRStrings(this, null);
-
-        if (mCamPermissionGranted) {
-            mCodeScanner.startPreview();
-        }
+        if (mCamPermissionGranted) mCodeScanner.startPreview();
     }
 
     @Override
