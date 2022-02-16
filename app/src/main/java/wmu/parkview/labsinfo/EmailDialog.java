@@ -167,7 +167,7 @@ public class EmailDialog extends DialogFragment {
                                     picUris.add(FileProvider.getUriForFile(mListActivity,
                                             "wmu.parkview.labsinfo.fileprovider", file));
 
-                                    if (mPicUris.size() == mPicUrisExpectedSize) picUrisLoaded();
+                                    if (picUris.size() == mPicUrisExpectedSize) picUrisLoaded();
                                 } catch (Exception e) {
                                     Toast.makeText(mListActivity, R.string.email_picture_error,
                                             Toast.LENGTH_LONG).show();
