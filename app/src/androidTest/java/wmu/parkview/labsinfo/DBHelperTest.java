@@ -19,16 +19,11 @@ import java.util.Set;
 public class DBHelperTest {
 
     /**
-     * This method tests getQRStrings() for all qr strings stored in our database
+     * This method tests getQRStrings() for presence of 'Unit Testing' qr string stored in our
+     * database
      */
     @Test
     public void getQRStrings() {
-        Set<String> expected = new HashSet<>();
-        expected.add("Lab 0");
-        expected.add("Lab 1");
-        expected.add("Lab 2");
-        expected.add("Unit Testing");
-
         boolean[] testing = new boolean[1];
         testing[0] = true;
 
@@ -37,7 +32,7 @@ public class DBHelperTest {
 
         while (testing[0]);
 
-        assertEquals(expected, actual);
+        assertTrue(actual.contains("Unit Testing"));
     }
 
     /**
