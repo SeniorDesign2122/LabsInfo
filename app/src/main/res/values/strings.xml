@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">LabsInfo</string>
+
+    <string name="get_db_data_error">Could not get data from database</string>
+    <string name="db_connect_error">Could not connect to database</string>
+
+    <string name="send_as_email">Send as Email</string>
+
+    <string name="video_error">Could not connect to YouTube</string>
+
+    <string name="email_address">Email Address</string>
+
+    <string name="open_email_app">Open in My Email App</string>
+    <string name="email_picture_error">
+        Could not store a picture in cache or get reference to it
+    </string>
+</resources>
